@@ -1,0 +1,139 @@
+<section class="reactiveForm">
+    <div class="container">
+        <div class = "formContainer">
+            <h1>Sign up</h1>
+
+            <form [formGroup]="myForm" (ngSubmit)="sendForm()">
+                <div>
+                    <input type="text"
+                    formControlName =Name
+                    placeholder="James">
+
+                    @if(myForm.get('Name')?.hasError("required")&& myForm.get('Name')?.touched){
+                        <div class="error"><p>Name is required</p></div>
+                    }
+                </div>
+
+                <div>
+                    <input type="email"
+                    formControlName =Email
+                    placeholder="gmail@mail.com">
+
+                    @if(myForm.get('Email')?.hasError("required")&& myForm.get('Email')?.touched){
+                        <div class="error"><p>Email is required</p></div>
+                    } @else if(myForm.get('Email')?.hasError("email")&& myForm.get('Email')?.touched){
+                        <div class="error"><p>Email is incorrect</p></div>
+                    }
+                </div>
+
+                <div>
+                    <input type="password"
+                    formControlName =Password
+                    placeholder="*******">
+
+                    @if(myForm.get('Password')?.hasError("wrong")&& myForm.get('Password')?.touched){
+                        <div class="error"><p>Password must have lower and upper case letters and numbers</p></div>
+                    }
+                    @if(myForm.get('Password')?.hasError("required")&& myForm.get('Password')?.touched){
+                        <div class="error"><p>Password is required</p></div>
+                    }
+                </div>
+
+                <div>
+                    <input type="password"
+                    formControlName =ConfirmPassword
+                    placeholder="*******">
+
+                    @if(myForm.hasError('passwordMismatch') && myForm.get('ConfirmPassword')?.touched){
+                        <div class="error"><p>Passwords don't match</p></div>
+                    }
+                </div>
+
+                <div>
+                    <p>Choose degree level: </p>
+                    @for (degree of degrees; track $index) {
+                        <label>
+                            <input type="radio"
+                            formControlName=Degree
+                            [value]="degree">
+                            {{degree}}
+                        </label>
+                    }
+                    @if(myForm.get('Degree')?.hasError("required")&& myForm.get('Degree')?.touched){
+                        <div class="error"><p>Degree is required</p></div>
+                    }
+                </div>
+                
+                <div>
+                    <input type="text"
+                    formControlName = Address
+                    placeholder="Av. do Mar 54"
+                    >
+
+                    @if(myForm.get('Address')?.hasError("required")&& myForm.get('Address')?.touched){
+                        <div class="error"><p>Address is required</p></div>
+                    }
+                </div>
+
+                <div>
+                    <p>Choose hobbies(not required): </p>
+                    <div formArrayName="Hobbies">
+                        @for (hobby of hobbies; track $index) {
+                            <label>
+                            <input type="checkbox"
+                            [formControlName]="$index">
+                            {{hobby}}
+                            </label>
+                        }
+                    </div>
+                </div>
+
+                <div>
+                <p>Choose your picture: </p>
+                <input type="file" (change) ="chooseFile($event)">
+            
+                
+             </div>
+
+             <div>
+                <input type="checkbox"
+                formControlName=IsConfirmed>
+                <p>"I agree on processing the information i gave before"</p>
+                @if (myForm.get('IsConfirmed')?.value === false) {
+                    <div>
+                        <p [ngStyle]="{'color': 'red'}">You must confirm to proceed</p>
+                    </div>
+                }
+             </div>
+
+             <div>
+                <button type="submit">Sign up</button>
+                <button type="reset">Cancel</button>
+            </div>
+             
+            </form>
+        </div>
+
+        @if(isSent && user; as submittedUser){
+            <div class="userContainer">
+                <p>{{submittedUser.Name}} info</p>
+
+                <div>
+                    <p>Email: {{submittedUser.Email}}</p>
+                    <p>Hobbies: </p>
+                    @for (hob of submittedUser.Hobbies; track $index) {
+                        <p>{{hob}}</p>
+                    }
+
+                    <p>Degree: {{submittedUser.Degree}}</p>
+
+                    <div>
+                @if(submittedUser.PictureLink){
+                    <img src="{{submittedUser.PictureLink}}" alt="user image">
+                }
+                </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
