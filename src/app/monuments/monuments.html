@@ -1,0 +1,17 @@
+<div class="monuments-wrapper">
+  <h3>Showing {{ displayedMonuments.length }} of {{ allMonuments.length }} Monuments</h3>
+
+  <div class="monuments-grid">
+    @for (monument of displayedMonuments; track monument.id) {
+      <div class="monument-card">
+        <img [src]="monument.imageUrl" [alt]="monument.title" />
+        <div class="card-body">
+          <h4>{{ monument.title }}</h4>
+          <p>{{ monument.description }}</p>
+        </div>
+      </div>
+    } @empty {
+      <p>No monuments to display.</p>
+    }
+  </div>
+</div>

@@ -1,0 +1,124 @@
+section {
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  min-height: calc(100vh - 75px);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #4a3e3d;
+}
+
+section > .container {
+  max-width: 950px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+section > .container > div:first-child {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(230, 120, 90, 0.15);
+}
+
+h2 {
+  margin: 0 0 1rem 0;
+  color: #e65100;
+  font-size: 2rem;
+  font-weight: 700;
+  border-bottom: 2px solid #ffe0b2;
+  padding-bottom: 0.75rem;
+}
+
+p {
+  line-height: 1.75;
+  font-size: 1rem;
+  margin: 0;
+  color: #4a3e3d;
+}
+
+section > .container > div:nth-child(2) {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+section img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 4px solid #ffffff;
+  box-shadow: 0 6px 16px rgba(230, 120, 90, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(230, 120, 90, 0.3);
+}
+
+section > div:last-child {
+  max-width: 950px;
+  margin: 2rem auto 0 auto;
+  padding: 1.5rem 2.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(230, 120, 90, 0.15);
+}
+
+section > div:last-child > p {
+  font-weight: 600;
+  color: #e65100;
+  margin-bottom: 0.75rem;
+}
+
+section > div:last-child a {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #ff8a65;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background-color 0.25s ease, transform 0.1s ease;
+}
+
+section > div:last-child a:hover {
+  background-color: #f4511e;
+}
+
+section > div:last-child a:empty::after {
+  content: "View Additional Monuments"; 
+}
+
+router-outlet + * {
+  display: block;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed #ffd8cc;
+}
+
+@media (max-width: 640px) {
+  section {
+    padding: 1.5rem 0.75rem;
+  }
+
+  section > .container > div:first-child,
+  section > div:last-child {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  section > .container > div:nth-child(2) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  section img {
+    height: 220px;
+  }
+}
